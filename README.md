@@ -1,59 +1,134 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel Social Friend System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A clean and modern Laravel application for managing user connections. This project allows users to search for people, send friend requests, manage incoming requests, and view their current friend list with a fully responsive UI built with Tailwind CSS and Alpine.js.
 
-## About Laravel
+## 🚀 Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+* **User Authentication:** Secure Login and Registration system.
+* **Friend List:** View all connected friends with the "Since" date and an option to **Unfriend**.
+* **Request Management:**
+    * **Incoming:** Accept or Reject friend requests.
+    * **Outgoing:** View requests you have sent and **Cancel** them if needed.
+* **Find Friends:**
+    * Search for users by name.
+    * **Smart Actions:** The UI automatically detects the relationship status:
+        * *Add Friend* (if no connection exists).
+        * *Request Sent* (if you already sent one).
+        * *Accept/Reject* (if they sent you a request).
+        * *Already Friends* (if you are connected).
+* **Modern UI:** Built with Tailwind CSS and Alpine.js for flash notifications and mobile responsiveness.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🛠️ Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* **Framework:** Laravel (PHP)
+* **Frontend:** Blade Templates
+* **Styling:** Tailwind CSS
+* **Interactivity:** Alpine.js
+* **Database:** MySQL / SQLite
 
-## Learning Laravel
+## ⚙️ Installation & Setup
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Follow these steps to set up the project locally.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 1. Clone the repository
+```bash
+git clone https://github.com/yash22nayak/socialapp
+cd socialapp
 
-## Laravel Sponsors
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 2. Install Dependencies
 
-### Premium Partners
+Install PHP and Node.js dependencies.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+composer install
+npm install
 
-## Contributing
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Environment Setup
 
-## Code of Conduct
+Copy the example environment file and generate the application key.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+cp .env.example .env
+php artisan key:generate
 
-## Security Vulnerabilities
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 4. Database Setup
 
-## License
+Configure your database credentials in the `.env` file (DB_DATABASE, DB_USERNAME, etc.). Then run the migrations.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan migrate
+
+```
+
+### 5. Build Assets
+
+Compile the Tailwind CSS assets.
+
+```bash
+npm run dev
+
+```
+
+---
+
+## 📖 Usage Guide
+
+Follow this specific flow to test the application logic:
+
+### Step 1: Registration
+
+Navigate to the **Register** page and create a new account with your details.
+
+### Step 2: Seed Data
+
+To populate the application with other users (so you have people to search for and friend requests), run the seeder command:
+
+```bash
+php artisan db:seed
+
+```
+
+### Step 3: Dashboard (Friends List)
+
+After logging in, you will be redirected to the default **Home** page.
+
+* This page displays your current list of friends.
+* You can click **Unfriend** to remove a user from this list.
+
+### Step 4: Find Friends
+
+Click on the **"Find People"** link in the header.
+
+* Use the search bar to find users.
+* **Send Request:** Click "Add Friend" to send a request.
+* **Context Aware:** If a user has already sent *you* a request, you will see options to **Accept** or **Reject** directly on their card.
+
+### Step 5: Request List
+
+Click on the **"Request List"** link in the header.
+
+* **Received:** See who wants to be your friend. You can **Confirm** or **Delete** the request.
+* **Sent:** View pending requests you sent to others. You can **Cancel** the request here.
+
+---
+
+## 📂 Project Structure
+
+* `resources/views/home.blade.php` - Displays the Friends List.
+* `resources/views/friend-requests/index.blade.php` - Manages Sent and Received requests.
+* `resources/views/friend-request/search-users.blade.php` - Search functionality and Add Friend logic.
+* `resources/views/layouts/app.blade.php` - Main layout containing the Navbar and Flash Messages.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
